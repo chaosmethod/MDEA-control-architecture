@@ -171,6 +171,60 @@ It provides the **execution architecture** for multi-regime physics.
 
 The architecture is presented as an **inspectable theoretical scheduler** intended to formalize regime transitions in physics.
 
-For this repo, we can **rewrite them from the perspective of the router** so the system looks like a **clean execution architecture** instead of a physics framework.
+# Framework Location
 
-If you want, I can also show you **the one diagram that will make the MDEA repo instantly understandable to researchers**. It turns the entire system into a **single control-system block diagram**, and it fits perfectly with the routing law you wrote.
+MDEA is one component of the broader **Holographic Projection Framework ecosystem**.
+
+The full framework stack is maintained in the primary repository:
+
+**Framework repository:**
+[https://github.com/chaosmethod/Holographic-Projection-Framework](https://github.com/chaosmethod/Holographic-Projection-Framework)
+
+That repository contains the foundational components that MDEA routes between.
+
+---
+
+## Framework Layer Map
+
+| Layer     | Role                                              | Location                                 |
+| --------- | ------------------------------------------------- | ---------------------------------------- |
+| **HPF**   | Legality constraints and regime-detection signals | `Holographic-Projection-Framework`       |
+| **MDEA**  | Execution routing and control architecture        | *this repository*                        |
+| **UHET**  | Saturation-regime phenomenology                   | `Holographic-Projection-Framework/UHET`  |
+| **QPRCA** | Reversible computational substrate implementation | `Holographic-Projection-Framework/QPRCA` |
+
+---
+
+## Relationship Between Repositories
+
+This repository focuses exclusively on the **control architecture**:
+
+* how execution is routed
+* how routing signals are interpreted
+* how domain experts are selected
+
+The **physical theories and substrate implementations** live in the main framework repository.
+
+MDEA acts as the **execution scheduler** that determines which of those domains performs the next system update.
+
+---
+
+## Execution Context
+
+The resulting execution model is:
+
+```
+HPF signals
+     ↓
+MDEA routing architecture
+     ↓
+Domain experts (GR / QFT / UHET / QPRCA)
+     ↓
+State evolution
+```
+
+Formally,
+
+$[
+X_{t+1} = F_{\Psi(X_t)}(X_t)
+]$
