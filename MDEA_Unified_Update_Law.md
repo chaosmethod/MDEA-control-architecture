@@ -165,3 +165,56 @@ The unified update law executes the following sequence:
 4. Apply the reversible update map of the selected expert.
 
 This yields a **single regulated evolution law on a reversible substrate** rather than a fixed single-regime equation.
+
+
+# Notations
+
+## Symbol Index
+
+| Symbol                   | Meaning                                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------- |
+| $X_t$                    | Full universe state at discrete update step $t$.                                                  |
+| $X_{t+1}$                | Universe state after one regulated substrate update.                                              |
+| $t$                      | Discrete update index of the substrate evolution.                                                 |
+| $\Psi(X_t)$              | HPF regulator routing functional selecting the active evolution operator.                         |
+| $\mathcal{E}$            | Set of admissible evolution operators (“experts”).                                                |
+| $E$                      | Generic evolution operator in the expert set.                                                     |
+| $E_{GR}$                 | Geometric regime operator (general relativity limit).                                             |
+| $E_{QFT}$                | Quantum field theory regime operator.                                                             |
+| $E_{UHET}$               | Ultra-high-energy override operator triggered by saturation.                                      |
+| $E_{QPRCA}$              | Substrate-resolution override operator triggered by geometry failure.                             |
+| $F_E$                    | Reversible substrate update map associated with operator $E$.                                     |
+| $L_{HPF}(E,X_t)$         | HPF legality functional determining whether operator $E$ is admissible for state $X_t$.           |
+| $V_{HPF}(E,X_t)$         | HPF validity functional measuring how well operator $E$ matches the regime represented by $X_t$.  |
+| $\mathrm{argmax}^{geom}$ | Validity maximization over legal operators with ties resolved in favor of the geometric operator. |
+| $G_{health}(X_t)$        | Geometry-health functional measuring integrity of the geometric sector.                           |
+| $\sigma_{max}(X_t)$      | Maximum local saturation functional measuring bandwidth or compactness saturation.                |
+| $\zeta$                  | HPF stability parameter used in legality constraints.                                             |
+
+---
+
+# Derived Routing Conditions
+
+| Condition               | Meaning                                                |
+| ----------------------- | ------------------------------------------------------ |
+| $G_{health}(X_t) < 0.3$ | Geometry failure. Execution reroutes to $E_{QPRCA}$.   |
+| $\sigma_{max}(X_t) > 1$ | Saturation detected. Execution reroutes to $E_{UHET}$. |
+| $L_{HPF}(E,X_t) = 0$    | Operator is illegal for the current state.             |
+| $L_{HPF}(E,X_t) = 1$    | Operator is admissible for routing.                    |
+
+---
+
+# Core Evolution Law
+
+$X_{t+1} = F_{\Psi(X_t)}(X_t)$
+
+---
+
+# Conceptual Layers
+
+| Layer     | Role                                                          |
+| --------- | ------------------------------------------------------------- |
+| Substrate | State space represented by $X_t$.                             |
+| Regulator | Routing functional $\Psi(X_t)$ selecting the active operator. |
+| Experts   | Evolution operators in $\mathcal{E}$.                         |
+| Update    | Reversible map $F_E$ producing the next state.                |
